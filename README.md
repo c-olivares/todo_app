@@ -2,7 +2,7 @@
 
 A new ToDo List App
 
-![A new ToDo list App].(https://github.com/c-olivares/todo_app/blob/main/assets/planifikt.gif)
+![A new ToDo list App](https://github.com/c-olivares/todo_app/blob/main/assets/planifikt.gif)
 
 ## Getting Started
 
