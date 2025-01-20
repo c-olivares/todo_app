@@ -3,11 +3,7 @@ import 'package:todoey/models/task.dart';
 import 'package:collection/collection.dart';
 
 class TaskData extends ChangeNotifier {
-  List<Task> _tasks = [
-    Task(name: 'Buy Milk'),
-    Task(name: 'Buy Eggs'),
-    Task(name: 'Buy Bread'),
-  ];
+  List<Task> _tasks = [];
 
   UnmodifiableListView<Task> get tasks {
     return UnmodifiableListView(_tasks);
@@ -20,6 +16,16 @@ class TaskData extends ChangeNotifier {
   void addTask(String newTaskTitle) {
     final task = Task(name: newTaskTitle);
     _tasks.add(task);
+    notifyListeners();
+  }
+
+  void updateTask(Task task) {
+    task.toggleDone();
+    notifyListeners();
+  }
+
+  void deleteTask(Task task) {
+    _tasks.remove(task);
     notifyListeners();
   }
 }

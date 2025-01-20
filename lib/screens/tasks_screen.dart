@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:todoey/screens/add_task_screen.dart';
-import '../models/task.dart';
 import '../widgets/taskslist.dart';
 import 'package:provider/provider.dart';
 import 'package:todoey/models/task_data.dart';
@@ -58,7 +57,7 @@ class TasksScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 10.0),
                 Text(
-                  "Todoey",
+                  "PlanifiKT",
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
@@ -66,7 +65,7 @@ class TasksScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "${Provider.of<TaskData>(context).taskCount} Tasks",
+                  "${Provider.of<TaskData>(context).taskCount} Tasks - Long Press to delete.",
                   style: TextStyle(color: Colors.white, fontSize: 18.0),
                 ),
               ],
