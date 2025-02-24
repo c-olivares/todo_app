@@ -1,4 +1,4 @@
-package com.example.todoey
+package com.planifikt
 
 import io.flutter.embedding.android.FlutterActivity
 

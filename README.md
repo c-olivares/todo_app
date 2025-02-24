@@ -1,6 +1,6 @@
-# todoey
+# planifikt
 
-A new ToDo List App
+A new ToDo List App by Carlos Olivares
 
 ## Getting Started
 
