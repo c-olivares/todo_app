@@ -14,7 +14,7 @@ class AddTaskScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            "Add Task",
+            "Agregar Tarea",
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.blueGrey, fontSize: 30.0),
           ),
@@ -32,7 +32,7 @@ class AddTaskScreen extends StatelessWidget {
               backgroundColor: Colors.blueGrey,
               shape: BeveledRectangleBorder(),
             ),
-            child: const Text('Add'),
+            child: const Text('Agregar'),
             onPressed: () {
               Provider.of<TaskData>(context, listen: false)
                   .addTask(newTaskTitle);

@@ -12,11 +12,13 @@ class TasksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: Colors.white,
       floatingActionButton: CircleAvatar(
+        radius: 35.0,
         child: FloatingActionButton.large(
           child: Icon(
-            Icons.add,
+            size: 35.0,
+            Icons.library_add_check,
             color: Colors.white,
           ),
           backgroundColor: Colors.purple[400],
@@ -35,14 +37,20 @@ class TasksScreen extends StatelessWidget {
         ),
       ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/fondo.jpg"),
+                fit: BoxFit.cover,
+              ),
+            ),
             padding: (EdgeInsets.only(
               top: 60.0,
               left: 30.0,
               right: 30.0,
-              bottom: 30.0,
+              bottom: 10.0,
             )),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,14 +67,18 @@ class TasksScreen extends StatelessWidget {
                 Text(
                   "PlanifiKT",
                   style: TextStyle(
-                    color: Colors.white,
+                    backgroundColor: Colors.white,
+                    color: Colors.black54,
                     fontWeight: FontWeight.w700,
-                    fontSize: 30.0,
+                    fontSize: 40.0,
                   ),
                 ),
                 Text(
-                  "${Provider.of<TaskData>(context).taskCount} Tasks - Long Press to delete.",
-                  style: TextStyle(color: Colors.white, fontSize: 18.0),
+                  "${Provider.of<TaskData>(context).taskCount} Tareas - Dejar presionado para borrar.",
+                  style: TextStyle(
+                      color: Colors.purple[400],
+                      fontSize: 18.0,
+                      backgroundColor: Colors.white),
                 ),
               ],
             ),
@@ -75,6 +87,8 @@ class TasksScreen extends StatelessWidget {
               child: Container(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("assets/apuntes.webp"), fit: BoxFit.cover),
               color: Colors.white,
               borderRadius: BorderRadius.only(
                   topRight: Radius.circular(20.0),
