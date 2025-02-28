@@ -1,12 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:todoey/screens/add_task_screen.dart';
 import '../widgets/taskslist.dart';
 import 'package:provider/provider.dart';
 import 'package:todoey/models/task_data.dart';
 
-class TasksScreen extends StatelessWidget {
+class TasksScreen extends StatefulWidget {
+  @override
+  State<TasksScreen> createState() => _TasksScreenState();
+}
+
+class _TasksScreenState extends State<TasksScreen> {
+  @override
+  void initState() {
+    loadBanner();
+    super.initState();
+  }
+
   Widget buildBottomSheet(BuildContext context) {
     return Container();
+  }
+
+  late BannerAd _bannerAd;
+  bool _isLoadedBanner = false;
+  final adUnitIdBanner = 'ca-app-pub-3940256099942544/9214589741';
+
+  void loadBanner() {
+    _bannerAd = BannerAd(
+      size: AdSize.fullBanner,
+      adUnitId: adUnitIdBanner,
+      listener: BannerAdListener(
+        onAdLoaded: (ad) {
+          debugPrint("$ad loaded.");
+          setState(() {
+            _isLoadedBanner = true;
+          });
+        },
+        onAdFailedToLoad: (ad, error) {
+          debugPrint("$ad  failed to load $error");
+          ad.dispose();
+        },
+      ),
+      request: const AdRequest(),
+    );
+    _bannerAd.load();
   }
 
   @override
@@ -98,6 +135,13 @@ class TasksScreen extends StatelessWidget {
           )),
         ],
       ),
+      bottomNavigationBar: _isLoadedBanner
+          ? SizedBox(
+              height: _bannerAd.size.height.toDouble(),
+              width: _bannerAd.size.width.toDouble(),
+              child: AdWidget(ad: _bannerAd),
+            )
+          : const SizedBox(),
     );
   }
 }
