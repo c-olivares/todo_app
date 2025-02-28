@@ -14,16 +14,31 @@ class _TasksScreenState extends State<TasksScreen> {
   @override
   void initState() {
     loadBanner();
+    loadInterstitial();
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final taskCount = Provider.of<TaskData>(context).taskCount;
+    checkAndShowInterstitial(taskCount);
   }
 
   Widget buildBottomSheet(BuildContext context) {
     return Container();
   }
 
+  //variables para el banner
   late BannerAd _bannerAd;
   bool _isLoadedBanner = false;
   final adUnitIdBanner = 'ca-app-pub-3940256099942544/9214589741';
+
+  //variables para el anuncio interstitial
+  InterstitialAd? _interstitialAd;
+  bool _isLoadedInterstitial = false;
+  bool _interstitialShown = false;
+  final adUnitIdInterstitial = 'ca-app-pub-3940256099942544/1033173712';
 
   void loadBanner() {
     _bannerAd = BannerAd(
@@ -46,8 +61,40 @@ class _TasksScreenState extends State<TasksScreen> {
     _bannerAd.load();
   }
 
+  void loadInterstitial() {
+    InterstitialAd.load(
+        adUnitId: adUnitIdInterstitial,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (ad) {
+            debugPrint("$ad loaded.");
+            setState(() {
+              _interstitialAd = ad;
+              _isLoadedInterstitial = true;
+            });
+            _interstitialAd?.fullScreenContentCallback =
+                FullScreenContentCallback(
+              onAdDismissedFullScreenContent: (ad) {
+                debugPrint("$ad onAdDismissedFullScreenContent.");
+                _interstitialShown = false;
+                loadInterstitial();
+              },
+              onAdFailedToShowFullScreenContent: (ad, error) {
+                debugPrint("$ad onAdFailedToShowFullScreenContent: $error");
+                loadInterstitial();
+              },
+            );
+          },
+          onAdFailedToLoad: (error) {
+            debugPrint("InterstitialAd failed to load: $error");
+          },
+        ));
+  }
+
   @override
   Widget build(BuildContext context) {
+    final taskCount = Provider.of<TaskData>(context).taskCount;
+
     return Scaffold(
       backgroundColor: Colors.white,
       floatingActionButton: CircleAvatar(
@@ -143,5 +190,18 @@ class _TasksScreenState extends State<TasksScreen> {
             )
           : const SizedBox(),
     );
+  }
+
+  void showInterstitial() {
+    if (_isLoadedInterstitial) {
+      _interstitialAd?.show();
+      _interstitialShown = true;
+    }
+  }
+
+  void checkAndShowInterstitial(int taskCount) {
+    if (taskCount == 5 && !_interstitialShown) {
+      showInterstitial();
+    }
   }
 }
