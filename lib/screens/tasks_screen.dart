@@ -32,13 +32,13 @@ class _TasksScreenState extends State<TasksScreen> {
   //variables para el banner
   late BannerAd _bannerAd;
   bool _isLoadedBanner = false;
-  final adUnitIdBanner = 'ca-app-pub-3940256099942544/9214589741';
+  final adUnitIdBanner = 'ca-app-pub-9215765906339675/8060768512';
 
   //variables para el anuncio interstitial
   InterstitialAd? _interstitialAd;
   bool _isLoadedInterstitial = false;
   bool _interstitialShown = false;
-  final adUnitIdInterstitial = 'ca-app-pub-3940256099942544/1033173712';
+  final adUnitIdInterstitial = 'ca-app-pub-9215765906339675/4582388621';
 
   void loadBanner() {
     _bannerAd = BannerAd(
