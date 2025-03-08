@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:todoey/screens/add_task_screen.dart';
@@ -13,9 +15,9 @@ class TasksScreen extends StatefulWidget {
 class _TasksScreenState extends State<TasksScreen> {
   @override
   void initState() {
+    super.initState();
     loadBanner();
     loadInterstitial();
-    super.initState();
   }
 
   @override
@@ -141,7 +143,7 @@ class _TasksScreenState extends State<TasksScreen> {
               children: [
                 CircleAvatar(
                   child: Icon(
-                    Icons.list,
+                    Icons.account_balance_outlined,
                     color: Colors.purple[400],
                     size: 30.0,
                   ),
@@ -173,7 +175,7 @@ class _TasksScreenState extends State<TasksScreen> {
             decoration: BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assets/apuntes.webp"), fit: BoxFit.cover),
-              color: Colors.white,
+              color: Colors.blueGrey[200],
               borderRadius: BorderRadius.only(
                   topRight: Radius.circular(20.0),
                   topLeft: Radius.circular(20.0)),

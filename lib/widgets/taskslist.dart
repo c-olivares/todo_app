@@ -10,7 +10,7 @@ class TasksList extends StatelessWidget {
       builder: (BuildContext context, taskData, child) {
         return ListView.builder(
           padding:
-              EdgeInsets.only(top: 50.0, left: 50.0, right: 0.0, bottom: 0.0),
+              EdgeInsets.only(top: 50.0, left: 60.0, right: 0.0, bottom: 0.0),
           itemBuilder: (context, index) {
             final task = taskData.tasks[index];
             return TaskTile(
